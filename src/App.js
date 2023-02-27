@@ -15,7 +15,7 @@ function App() {
   }
 
   return (
-    <div className="App bg-violet-100 ">
+    <div className="App ">
       <TaskContext.Provider value={{ items, setItems, deleteNode }}>
         <RouterPaths />
       </TaskContext.Provider>
