@@ -6,7 +6,7 @@ import TaskContext from "../context/TaskContext";
 const TaskList = () => {
 
     const [item, setItem] = useState(''); // state in input 
-    const { items, setItems, deleteNode } = useContext(TaskContext);
+    const { items, setItems, deleteNode, changeState } = useContext(TaskContext);
 
 
     useEffect(() => {
@@ -28,11 +28,6 @@ const TaskList = () => {
         }
     }
 
-    /*const deleteNode = (id) => {
-        setItems(items.filter((item)=> item.id !== id))
-      }*/
-
-
     //activamos "enter" -> if press -> add element
     const keyPress = (e) => {
         const code = e.keyCode || e.which;
@@ -46,7 +41,7 @@ const TaskList = () => {
         <div className="task-list bg-pink-300 w-[55vw] p-8 rounded-lg flex-col items-center justify-center gap-4  m-4 ml-8">
             {items.map((item, ind) => {
                 return (
-                    <Task key={`task-${ind}`} item={`${item.item}`} deleteNode={() => deleteNode(item.id)} />
+                    <Task key={`task-${ind}`} item={`${item.item}`} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} />
                 )
             })
             }

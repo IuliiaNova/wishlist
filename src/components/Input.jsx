@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { v4 } from "uuid";
 import '../style/input-field.css';
 import '../style/tailwind.css';
@@ -8,25 +8,7 @@ import TaskContext from "../context/TaskContext";
 const Input = ({ children }) => {
 
   const [item, setItem] = useState(''); // state in input 
-  const { items, setItems, deleteNode } = useContext(TaskContext);
-
-  /*
-      const [item, setItem] = useState(''); // state in input 
-      const [items, setItems] = useState(
-        JSON.parse(localStorage.getItem('items')) || []
-      ); // state of array of tasks 
-      
-      useEffect(() => {
-      localStorage.setItem('items', JSON.stringify(items))
-      }, [items]) //dependencia -> si se cambia 'items' -> inicia useEffect
-      
-      
-      
-      const deleteNode = (id) => {
-          setItems(items.filter((item)=> item.id !== id))
-        }
-        
-      */
+  const { items, setItems } = useContext(TaskContext);
 
   const newItem = () => {
     if (item.trim() !== '') {
@@ -51,7 +33,6 @@ const Input = ({ children }) => {
     }
   }
 
-
   return (
     <div className='wrapper-input-field mb-6'>
       <div className='input w-[100vw] h-[25vh] flex items-center justify-center '>
@@ -65,7 +46,7 @@ const Input = ({ children }) => {
         <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2' onClick={newItem}>Make a wish</button>
       </div>
       <>
-        <TaskContext.Provider value={{ items, setItems }}>
+        <TaskContext.Provider value={{ item, items, setItems }}>
           {children}
         </TaskContext.Provider>
       </>
@@ -74,11 +55,5 @@ const Input = ({ children }) => {
   );
 }
 
-/* {items.map((item, ind)=> {
-            return (
-                <Task key={`task-${ind}`} item={`${item.item}`} deleteNode={()=>deleteNode(item.id)} />
-            )
-          })
-        }*/
 
 export default Input;
