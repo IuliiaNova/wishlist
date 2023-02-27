@@ -43,7 +43,7 @@ const TaskList = () => {
 
 
     return (
-        <div className="task-list">
+        <div className="task-list bg-pink-300 w-[55vw] p-8 rounded-lg flex-col items-center justify-center gap-4  m-4 ml-8">
             {items.map((item, ind) => {
                 return (
                     <Task key={`task-${ind}`} item={`${item.item}`} deleteNode={() => deleteNode(item.id)} />

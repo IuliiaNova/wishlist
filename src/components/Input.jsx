@@ -64,9 +64,6 @@ const Input = ({ children }) => {
           onKeyPress={(e) => keyPress(e)} />
         <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2' onClick={newItem}>Make a wish</button>
       </div>
-
-
-
       <>
         <TaskContext.Provider value={{ items, setItems }}>
           {children}
