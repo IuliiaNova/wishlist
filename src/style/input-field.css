@@ -1,0 +1,12 @@
+.input {
+    background-image: url(../image/stars.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.enter:hover {
+    box-shadow: 10px 10px 10px  rgb(164, 40, 151);
+    color: rgb(164, 40, 151);
+    font-weight: bold;
+}
+
