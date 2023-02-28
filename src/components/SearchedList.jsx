@@ -60,7 +60,7 @@ const SearchedList = () => {
                 ))
             ) : (
                 <div className="task-list bg-violet-700 p-8 rounded-lg flex flex-col items-center justify-center gap-2 m-4 ml-8">
-                    <p className="text-white text-xl font-bold mb-4">It's time to make a wish!</p>
+                    <p className="text-white text-xl font-bold mb-4 font-mono">It's time to make a wish!</p>
                 </div>
             )}
             <button className="text-white font-mono font-bold m-2 p-2 rounded-lg border-2 font-bold hover:bg-gray-300 hover:text-violet-800"
