@@ -39,7 +39,7 @@ const SearchedList = () => {
     const displayItems = matchingItems.length > 0 ? matchingItems : items;
 
     return (
-        <div className="matching-items w-[55vw] bg-violet-700  p-8 rounded-lg flex flex-col items-center justify-center gap-2  m-4 ml-8">
+        <div className="matching-items w-[55vw] bg-violet-700  p-8 rounded-lg flex flex-col items-center justify-center gap-2 m-4 ml-80">
             {displayItems.length > 0 ? (
                 displayItems.map((item, ind) => (
                     <div >

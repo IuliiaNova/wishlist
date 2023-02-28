@@ -9,7 +9,7 @@ export const Search = () => {
     const { searchItem, setSearchItem, searchItems } = useContext(TaskContext);
 
     return (
-        <div className="input-with-icon flex items-center justify-right m-4 ml-10">
+        <div className="input-with-icon flex items-center justify-right m-4 ml-80">
             <form onSubmit={searchItems} >
                 <input
                     type="text"
