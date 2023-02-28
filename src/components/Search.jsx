@@ -25,7 +25,7 @@ export const Search = ({ onSearch }) => {
             <form onSubmit={userSearch}>
                 <input
                     type="text"
-                    className="search-input bg-violet-100 w-64 h-8 "
+                    className="search-input bg-violet-100 w-80 h-8 "
                     placeholder="Search"
                     value={searchItem}
                     onChange={e => setSearchItem(e.target.value)} />

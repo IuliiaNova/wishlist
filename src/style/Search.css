@@ -14,7 +14,7 @@
   }
 
   .search-input {
-    border: 1px solid #ee49d2;
+    border: 1px solid #7f1aae;
     border-top-left-radius: 15px;
     outline: none; 
     font-family: 'Roboto', sans-serif;
@@ -25,7 +25,7 @@
   }
 
   .find {
-    border: 1px solid #ee49d2;
+    border: 1px solid #7f1aae;
     border-bottom-right-radius: 15px;
     font-family: 'Roboto', sans-serif;
     border-left: none;
