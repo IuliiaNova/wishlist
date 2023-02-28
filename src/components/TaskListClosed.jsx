@@ -7,6 +7,7 @@ const TaskListClosed = () => {
 
     const [item, setItem] = useState(''); // state in input 
     const { items, setItems, deleteNode, changeState } = useContext(TaskContext);
+    const classN = "flex flex-col line-through bg-rose-300 w-[45vw] border text-lg rounded-lg items-center justify-center p-1 ";
 
 
     useEffect(() => {
@@ -40,7 +41,7 @@ const TaskListClosed = () => {
     return (
         <div className="task-list bg-violet-700  p-8 rounded-lg flex flex-col items-center justify-center gap-2  m-4 ml-8">
             {items.filter((item) => item.state === "closed").map((item, ind) => (
-                <Task key={`task-${ind}`} item={`${item.item}`} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} />
+                <Task key={`task-${ind}`} item={`${item.item}`} className={classN} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} />
             ))}
         </div>
     )

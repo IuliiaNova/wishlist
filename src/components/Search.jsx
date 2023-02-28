@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import "../style/Search.css";
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import TaskContext from '../context/TaskContext';
 
 
 export const Search = ({ onSearch }) => {
+    const {items} = useContext(TaskContext);
+    console.log("items", items)
 
     const [searchItem, setSearchItem] = useState('');
     
@@ -27,7 +30,7 @@ export const Search = ({ onSearch }) => {
                     value={searchItem}
                     onChange={e => setSearchItem(e.target.value)} />
                 <span className="icon"><FontAwesomeIcon icon={faMagnifyingGlass} /></span>
-                <button className="find text-violet-900 bg-violet-200 w-20 h-8 mb-2 font-mono">Find</button>
+                <button className="find text-violet-900 bg-violet-200 w-20 h-8 mb-2 font-mono" onClick={e => setSearchItem(e.target.value)} >Find</button>
             </form>
         </div>
        
