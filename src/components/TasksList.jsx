@@ -41,7 +41,7 @@ const TaskList = () => {
         <div className="task-list bg-violet-700  p-8 rounded-lg flex flex-col items-center justify-center gap-2  m-4 ml-8">
             {items.map((item, ind) => {
                 return (
-                    <Task key={`task-${ind}`} item={`${item.item}`} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} className={item.state === "closed" ? "flex flex-col line-through bg-red-500 w-[45vw] border text-lg rounded-lg items-center justify-center p-1" : "flex flex-col "}/>
+                    <Task key={`task-${ind}`} item={`${item.item}`} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} className={item.state === "closed" ? "flex flex-col line-through bg-lime-500 w-[45vw] border text-lg rounded-lg items-center justify-center p-1" : "flex flex-col "}/>
                 )
             })
             }

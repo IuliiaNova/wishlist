@@ -7,7 +7,7 @@ const TaskListClosed = () => {
 
     const [item, setItem] = useState(''); // state in input 
     const { items, setItems, deleteNode, changeState } = useContext(TaskContext);
-    const classN = "flex flex-col line-through bg-red-500 w-[45vw] border text-lg rounded-lg items-center justify-center p-1 ";
+    const classN = "flex flex-col line-through bg-lime-500 w-[45vw] border text-lg rounded-lg items-center justify-center p-1 ";
 
 
     useEffect(() => {
