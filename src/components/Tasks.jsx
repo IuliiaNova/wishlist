@@ -6,9 +6,7 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Task = ({ item, deleteNode, changeState, className}) => {
 
-   /*  if(changeState){
-        className = "line-through";
-    } */
+   
 
 return (
     <div className="w-[50vw] task bg-violet-50 border border-gray-300 text-gray-900 text-lg rounded-lg  block w-1/4 p-1 md:p-2.5 flex justify-between m-2">
