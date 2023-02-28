@@ -3,7 +3,7 @@ import Task from "./Tasks";
 import { v4 } from "uuid";
 import TaskContext from "../context/TaskContext";
 
-const TaskList = () => {
+const TaskListActive = () => {
 
     const [item, setItem] = useState(''); // state in input 
     const { items, setItems, deleteNode, changeState } = useContext(TaskContext);
@@ -38,16 +38,14 @@ const TaskList = () => {
 
 
     return (
+
         <div className="task-list bg-violet-700  p-8 rounded-lg flex flex-col items-center justify-center gap-2  m-4 ml-8">
-            {items.map((item, ind) => {
-                return (
-                    <Task key={`task-${ind}`} item={`${item.item}`} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} />
-                )
-            })
-            }
+            {items.filter((item) => item.state === "active").map((item, ind) => (
+                <Task key={`task-${ind}`} item={`${item.item}`} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} />
+            ))}
         </div>
     )
 }
 
 
-export default TaskList;
+export default TaskListActive;
