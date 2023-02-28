@@ -2,6 +2,7 @@
     background-image: url(../image/stars.webp);
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: 'Roboto', sans-serif;
 }
 
 .enter:hover {

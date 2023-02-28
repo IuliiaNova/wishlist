@@ -7,7 +7,7 @@ import TaskList from "../components/TasksList";
 const Closed = () => {
 
     return (
-        <div className=" bg-violet-100 ">
+        <div className="  ">
       <Input />
       <Buttons />
       <Search />

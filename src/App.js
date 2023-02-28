@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import RouterPaths from './router/Router';
 import TaskContext from './context/TaskContext';
 

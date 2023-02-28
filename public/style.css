@@ -1,0 +1,7 @@
+.container {
+    /* background-image: url(../src/image/stars.webp);
+    background-repeat: no-repeat;
+    background-size: cover; */
+    background-color: rgb(233, 233, 233);
+    font-family: 'Roboto', sans-serif;
+}
