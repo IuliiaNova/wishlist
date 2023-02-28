@@ -13,22 +13,30 @@ function App() {
     setItems(items.filter((item) => item.id !== id))
   }
 
+  const updateNode = (id) => {
+    /*setItems(items.map((task) => {
+      return task.id === id ? { ...task, item: task.item === "7" } : task.item;
+    }));*/
+    console.log("update")
+    //setItems(items.filter((item) => item.id !== id))
+  }
+
+
   const changeState = (id) => {
     setItems(items.map((task) => {
       return task.id === id ? { ...task, state: task.state === "active" ? "closed" : "active" } : task;
-      
     }));
     const selectedItem = items.find((task) => task.id === id);
-  if (selectedItem.state === "active") {
-    setTimeout(function() {
-      alert("Congratulations, your Dreams come true!");
-    }, 500);
-  }
+    if (selectedItem.state === "active") {
+      setTimeout(function () {
+        alert("Congratulations, your Dreams come true!");
+      }, 500);
+    }
   };
 
   return (
     <div className="App ">
-      <TaskContext.Provider value={{ items, setItems, deleteNode, changeState }}>
+      <TaskContext.Provider value={{ items, setItems, deleteNode, changeState, updateNode }}>
         <RouterPaths />
       </TaskContext.Provider>
     </div>
