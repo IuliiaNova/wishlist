@@ -5,28 +5,28 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 
-const Task = ({ item, deleteNode, changeState, className, updateNode}) => {
-    const [editable, setEditable] = useState(false);
-    const [newItemValue, setNewItemValue] = useState(item);
-    
+const Task = ({ item, deleteNode, changeState, className, updateNode, searchItems }) => {
+  const [editable, setEditable] = useState(false);
+  const [newItemValue, setNewItemValue] = useState(item);
 
-    const inputChange = (e) => {
-        setNewItemValue(e.target.value);
-      };
-    
-      const updateClick = () => {
-        updateNode(newItemValue);
-        setEditable(false);
-      };
-    
-      const cancelClick = () => {
-        setEditable(false);
-        setNewItemValue(item);
-      };
 
-  
+  const inputChange = (e) => {
+    setNewItemValue(e.target.value);
+  };
 
-return (
+  const updateClick = () => {
+    updateNode(newItemValue);
+    setEditable(false);
+  };
+
+  const cancelClick = () => {
+    setEditable(false);
+    setNewItemValue(item);
+  };
+
+
+
+  return (
     <div className="w-[50vw] task bg-violet-50 border border-gray-300 text-gray-900 text-lg rounded-lg  block w-1/4 p-1 md:p-2.5 flex justify-between m-2">
       <input type="checkbox" onClick={changeState} />
       {editable ? (
@@ -45,7 +45,7 @@ return (
             <FontAwesomeIcon icon={faPencilAlt} onClick={() => setEditable(true)} className="flex-col text-violet-800" />
             <FontAwesomeIcon icon={faTrash} onClick={deleteNode} className="flex-col text-violet-800" />
           </>
-        ) }
+        )}
       </div>
     </div>
   );

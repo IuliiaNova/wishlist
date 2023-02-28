@@ -10,7 +10,6 @@ const Closed = () => {
         <div className="  ">
       <Input />
       <Buttons />
-      <Search />
       <TaskListClosed />
     </div>
   )

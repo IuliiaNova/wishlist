@@ -34,9 +34,22 @@ function App() {
     }
   };
 
+  const [searchItem, setSearchItem] = useState('');
+  const [matchingItems, setMatchingItems] = useState([]);
+
+  const searchItems = (e) => {
+      e.preventDefault();
+      const filteredItems = items.filter((item) => {
+          const checkItem = item.item;
+          return checkItem.toLowerCase().includes(searchItem.toLowerCase());
+      });
+      setMatchingItems(filteredItems);
+      setSearchItem(''); //matchingItems
+  };
+
   return (
     <div className="App ">
-      <TaskContext.Provider value={{ items, setItems, deleteNode, changeState, updateNode }}>
+      <TaskContext.Provider value={{ items, setItems, deleteNode, changeState, updateNode, searchItem, setSearchItem, matchingItems, setMatchingItems, searchItems }}>
         <RouterPaths />
       </TaskContext.Provider>
     </div>

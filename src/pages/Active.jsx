@@ -10,7 +10,6 @@ const Active = () => {
         <div className="">
       <Input />
       <Buttons />
-      <Search />
       <TaskListActive />
     </div>
   )
