@@ -7,10 +7,9 @@ import TaskContext from './context/TaskContext';
 function App() {
 
   const [item, setItem] = useState('');
-
-  const [items, setItems] = useState(
-    JSON.parse(localStorage.getItem('items')) || []
-  );
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || [] );
+  const [searchItem, setSearchItem] = useState('');
+  const [matchingItems, setMatchingItems] = useState([]);
 
 
   const deleteNode = (id) => {
@@ -28,10 +27,7 @@ function App() {
       }, 500);
     }
   };
-
-  const [searchItem, setSearchItem] = useState('');
-  const [matchingItems, setMatchingItems] = useState([]);
-
+  
   const searchItems = (e) => {
       e.preventDefault();
       const filteredItems = items.filter((item) => {

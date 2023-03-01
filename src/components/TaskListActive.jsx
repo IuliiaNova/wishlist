@@ -14,35 +14,12 @@ const TaskListActive = () => {
         localStorage.setItem('items', JSON.stringify(items))
     }, [items]) //dependencia -> si se cambia 'items' -> inicia useEffect
 
-    /*const newItem = () => {
-        if (item.trim() !== '') {
-            const newItem = {
-                id: v4(),
-                item: item,
-                state: "active",
-            }
-            setItems((items) => [newItem, ...items]); // orden how the save new task
-            setItem('')
-        } else {
-            alert('You forgot to make a wish...')
-            setItem('')
-        }
-    }
-
-    //activamos "enter" -> if press -> add element
-    const keyPress = (e) => {
-        const code = e.keyCode || e.which;
-        if (code === 13) {
-            newItem();
-        }
-    }*/
-
 
     return (
 
         <div className="task-list w-[55vw] bg-violet-700  p-8 rounded-lg flex flex-col items-center justify-center gap-2  m-4 ml-80">
             {items.filter((item) => item.state === "active").map((item, ind) => (
-                <Task key={`task-${ind}`} item={`${item.item}`} className={classN} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} />
+                <Task key={`task-${ind}`} idItem={`${item.id}`} item={`${item.item}`} className={classN} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} />
             ))}
             <p className="text-white font-mono">Total wishes: {items.filter((item) => item.state !== "closed").length} </p>
         </div>

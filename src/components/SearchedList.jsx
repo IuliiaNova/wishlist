@@ -22,6 +22,7 @@ const SearchedList = () => {
                     <div >
                         <Task
                             key={`task-${ind}`}
+                            idItem={item.id}
                             item={item.item}
                             deleteNode={() => deleteNode(item.id)}
                             updateNode={() => updateNode(item.id)}

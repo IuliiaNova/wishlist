@@ -6,8 +6,7 @@ const TaskList = () => {
 
  // state in input 
   const { item, setItem, items, deleteNode, changeState, searchItems } = useContext(TaskContext);
-  [item, setItem] = useState('');
-
+  //[item, setItem] = useState('');
 
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items))
@@ -35,7 +34,6 @@ const TaskList = () => {
                 : "flex flex-col"
             } 
             searchItems={() => searchItems()}
-           
           />
         ))
       )}
