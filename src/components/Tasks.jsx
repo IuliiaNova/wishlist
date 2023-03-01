@@ -24,8 +24,6 @@ const Task = ({ idItem, item, deleteNode, changeState, className }) => {
         }
         return item;
       })
-      
-      console.log({idItem})
       setItems(arr);
       setEditable(false);
   };
