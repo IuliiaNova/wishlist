@@ -5,22 +5,17 @@ import TaskContext from './context/TaskContext';
 
 
 function App() {
+
+  const [item, setItem] = useState('');
+
   const [items, setItems] = useState(
     JSON.parse(localStorage.getItem('items')) || []
   );
 
+
   const deleteNode = (id) => {
     setItems(items.filter((item) => item.id !== id))
   }
-
-  const updateNode = (id) => {
-    /*setItems(items.map((task) => {
-      return task.id === id ? { ...task, item: task.item === "7" } : task.item;
-    }));*/
-    console.log("update")
-    //setItems(items.filter((item) => item.id !== id))
-  }
-
 
   const changeState = (id) => {
     setItems(items.map((task) => {
@@ -49,7 +44,7 @@ function App() {
 
   return (
     <div className="App ">
-      <TaskContext.Provider value={{ items, setItems, deleteNode, changeState, updateNode, searchItem, setSearchItem, matchingItems, setMatchingItems, searchItems }}>
+      <TaskContext.Provider value={{ item, setItem, items, setItems, deleteNode, changeState, searchItem, setSearchItem, matchingItems, setMatchingItems, searchItems }}>
         <RouterPaths />
       </TaskContext.Provider>
     </div>

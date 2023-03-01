@@ -1,41 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import Task from "./Tasks";
-import { v4 } from "uuid";
 import TaskContext from "../context/TaskContext";
 
 const TaskListClosed = () => {
 
-    const [item, setItem] = useState(''); // state in input 
-    const { items, setItems, deleteNode, changeState } = useContext(TaskContext);
+    const { items, deleteNode, changeState } = useContext(TaskContext);
     const classN = "flex flex-col line-through bg-lime-500 w-[45vw] border text-lg rounded-lg items-center justify-center p-1 ";
 
 
     useEffect(() => {
         localStorage.setItem('items', JSON.stringify(items))
     }, [items]) //dependencia -> si se cambia 'items' -> inicia useEffect
-
-    const newItem = () => {
-        if (item.trim() !== '') {
-            const newItem = {
-                id: v4(),
-                item: item,
-                state: "active",
-            }
-            setItems((items) => [newItem, ...items]); // orden how the save new task
-            setItem('')
-        } else {
-            alert('You forgot to make a wish...')
-            setItem('')
-        }
-    }
-
-    //activamos "enter" -> if press -> add element
-    const keyPress = (e) => {
-        const code = e.keyCode || e.which;
-        if (code === 13) {
-            newItem();
-        }
-    }
 
 
     return (

@@ -5,35 +5,12 @@ import TaskContext from "../context/TaskContext";
 
 const SearchedList = () => {
 
-    const [item, setItem] = useState(''); // state in input 
-    const { items, setItems, deleteNode, changeState, updateNode, searchItems, matchingItems } = useContext(TaskContext);
+    const { items, deleteNode, changeState, updateNode, searchItems, matchingItems } = useContext(TaskContext);
 
     useEffect(() => {
         localStorage.setItem('items', JSON.stringify(items))
     }, [items]) //dependencia -> si se cambia 'items' -> inicia useEffect
 
-    const newItem = () => {
-        if (item.trim() !== '') {
-            const newItem = {
-                id: v4(),
-                item: item,
-                state: "active",
-            }
-            setItems((items) => [newItem, ...items]); // orden how the save new task
-            setItem('')
-        } else {
-            alert('You forgot to make a wish...')
-            setItem('')
-        }
-    }
-
-    //activamos "enter" -> if press -> add element
-    const keyPress = (e) => {
-        const code = e.keyCode || e.which;
-        if (code === 13) {
-            newItem();
-        }
-    }
 
     // determine which items to display based on whether there are matching items
     const displayItems = matchingItems.length > 0 ? matchingItems : items;
@@ -44,7 +21,7 @@ const SearchedList = () => {
                 displayItems.map((item, ind) => (
                     <div >
                         <Task
-                            key={`task-search-${ind}`}
+                            key={`task-${ind}`}
                             item={item.item}
                             deleteNode={() => deleteNode(item.id)}
                             updateNode={() => updateNode(item.id)}

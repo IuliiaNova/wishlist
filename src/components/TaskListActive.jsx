@@ -14,7 +14,7 @@ const TaskListActive = () => {
         localStorage.setItem('items', JSON.stringify(items))
     }, [items]) //dependencia -> si se cambia 'items' -> inicia useEffect
 
-    const newItem = () => {
+    /*const newItem = () => {
         if (item.trim() !== '') {
             const newItem = {
                 id: v4(),
@@ -35,7 +35,7 @@ const TaskListActive = () => {
         if (code === 13) {
             newItem();
         }
-    }
+    }*/
 
 
     return (

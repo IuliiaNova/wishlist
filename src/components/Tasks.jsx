@@ -1,29 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import TaskContext from "../context/TaskContext";
 
 
 
-const Task = ({ item, deleteNode, changeState, className, updateNode, searchItems }) => {
-  const [editable, setEditable] = useState(false);
-  const [newItemValue, setNewItemValue] = useState(item);
+const Task = ({ idItem, item, deleteNode, changeState, className }) => {
 
+  const { items, setItems } = useContext(TaskContext);
 
   const inputChange = (e) => {
     setNewItemValue(e.target.value);
   };
 
-  const updateClick = () => {
-    updateNode(newItemValue);
-    setEditable(false);
+  const [editable, setEditable] = useState(false);
+  const [newItemValue, setNewItemValue] = useState(item);
+  
+  const updateClick = (id) => {
+      const arr = items.map((item) => {
+        if (item.id === id) {
+           item.item = newItemValue
+        }
+        return item;
+      })
+      
+      console.log({idItem})
+      setItems(arr);
+      setEditable(false);
   };
+
 
   const cancelClick = () => {
     setEditable(false);
     setNewItemValue(item);
   };
-
 
 
   return (
@@ -37,7 +48,7 @@ const Task = ({ item, deleteNode, changeState, className, updateNode, searchItem
       <div className="icons flex gap-2">
         {editable ? (
           <>
-            <button onClick={updateClick} className="text-violet-800 font-bold">Update</button>
+            <button onClick={()=> updateClick(idItem)} className="text-violet-800 font-bold">Update</button>
             <button onClick={cancelClick} className="text-violet-800 font-bold">Cancel</button>
           </>
         ) : (

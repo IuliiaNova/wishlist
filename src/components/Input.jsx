@@ -7,8 +7,8 @@ import TaskContext from "../context/TaskContext";
 
 const Input = ({ children }) => {
 
-  const [item, setItem] = useState(''); // state in input 
-  const { items, setItems } = useContext(TaskContext);
+  // const [item, setItem] = useState(''); // state in input 
+  const { item, setItem, items, setItems } = useContext(TaskContext);
 
   const newItem = () => {
     if (item.trim() !== '') {
