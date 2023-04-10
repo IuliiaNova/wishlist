@@ -33,7 +33,7 @@ const Input = ({ children }) => {
       newItem();
     }
   }
-
+console.table(process.env.REACT_APP_AUTH0_DOMAIN, process.env.REACT_APP_AUTH0_CLIENT_ID)
   return (
     <div className='wrapper-input-field mb-6'>
       <div className='input w-[100vw] h-[25vh] flex items-center justify-center '>
@@ -46,6 +46,7 @@ const Input = ({ children }) => {
           onKeyPress={(e) => keyPress(e)} />
         <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2 font-mono' onClick={newItem}>Make a wish</button>
         <LoginBtn /> 
+        
       </div>
       <>
         <TaskContext.Provider value={{ item, items, setItems }}>
