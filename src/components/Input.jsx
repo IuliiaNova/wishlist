@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import '../style/input-field.css';
 import '../style/tailwind.css';
 import TaskContext from "../context/TaskContext";
+import LoginBtn from "./LoginBtn";
 
 
 const Input = ({ children }) => {
@@ -44,6 +45,7 @@ const Input = ({ children }) => {
           onChange={(e) => setItem(e.target.value)}
           onKeyPress={(e) => keyPress(e)} />
         <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2 font-mono' onClick={newItem}>Make a wish</button>
+        <LoginBtn /> 
       </div>
       <>
         <TaskContext.Provider value={{ item, items, setItems }}>
