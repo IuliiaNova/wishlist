@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import RouterPaths from './router/Router';
-import TaskContext from './context/TaskContext';
+//import TaskContext from './context/TaskContext';
 
+import TaskProvider from './context/TaskProvider';
 
 
 function App() {
@@ -40,9 +41,9 @@ function App() {
 
   return (
     <div className="App ">
-      <TaskContext.Provider value={{ item, setItem, items, setItems, deleteNode, changeState, searchItem, setSearchItem, matchingItems, setMatchingItems, searchItems }}>
+      <TaskProvider>
         <RouterPaths />
-      </TaskContext.Provider>
+      </TaskProvider>
     </div>
   );
 }
