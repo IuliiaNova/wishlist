@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { v4 } from "uuid";
 import '../style/input-field.css';
 import '../style/tailwind.css';
@@ -8,7 +8,6 @@ import LoginBtn from "./LoginBtn";
 
 const Input = ({ children }) => {
 
-  // const [item, setItem] = useState(''); // state in input 
   const { item, setItem, items, setItems } = useContext(TaskContext);
 
   const newItem = () => {
