@@ -5,7 +5,7 @@ import TaskContext from "../context/TaskContext";
 const TaskList = () => {
 
  // state in input 
-  const { item, setItem, items, deleteNode, changeState, searchItems } = useContext(TaskContext);
+  const { item, setItem, items, deleteNode, changeState, searchItems, getWishes, wishes } = useContext(TaskContext);
   //[item, setItem] = useState('');
 
   useEffect(() => {
@@ -15,6 +15,13 @@ const TaskList = () => {
   useEffect(() => {
    console.log("item")
   }, [items]) 
+
+  useEffect(() => {
+    getWishes();
+    console.log(wishes)
+   }); 
+
+
 
   return (
     <div className="task-list bg-violet-700 p-8 rounded-lg flex flex-col items-center justify-center gap-2 m-4 ml-8">
@@ -35,6 +42,7 @@ const TaskList = () => {
             } 
             searchItems={() => searchItems()}
           />
+          
         ))
       )}
       <p className="text-white">Total wishes: {items.length} </p>

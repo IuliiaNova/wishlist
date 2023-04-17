@@ -8,17 +8,17 @@ import LoginBtn from "./LoginBtn";
 
 const Input = ({ children }) => {
 
-  const { item, setItem, items, setItems } = useContext(TaskContext);
+  const { item, setItem, items, setItems, addWish } = useContext(TaskContext);
 
   const newItem = () => {
     if (item.trim() !== '') {
       const newItem = {
-        id: v4(),
-        item: item,
-        state: "active",
+        wishTitle: item,
       }
       setItems((items) => [newItem, ...items]); // orden how the save new task
       setItem('')
+      addWish(newItem)
+
     } else {
       alert('You forgot to make a wish...')
       setItem('')
@@ -32,7 +32,7 @@ const Input = ({ children }) => {
       newItem();
     }
   }
-console.table(process.env.REACT_APP_AUTH0_DOMAIN, process.env.REACT_APP_AUTH0_CLIENT_ID)
+
   return (
     <div className='wrapper-input-field mb-6'>
       <div className='input w-[100vw] h-[25vh] flex items-center justify-center '>
@@ -44,15 +44,10 @@ console.table(process.env.REACT_APP_AUTH0_DOMAIN, process.env.REACT_APP_AUTH0_CL
           onChange={(e) => setItem(e.target.value)}
           onKeyPress={(e) => keyPress(e)} />
         <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2 font-mono' onClick={newItem}>Make a wish</button>
+       
         <LoginBtn /> 
         
       </div>
-      <>
-        <TaskContext.Provider value={{ item, items, setItems }}>
-          {children}
-        </TaskContext.Provider>
-      </>
-
     </div>
   );
 }
