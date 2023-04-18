@@ -1,31 +1,25 @@
 import React, { useContext } from "react";
-import { v4 } from "uuid";
 import '../style/input-field.css';
 import '../style/tailwind.css';
 import TaskContext from "../context/TaskContext";
-import LoginBtn from "./LoginBtn";
 
 
-const Input = ({ children }) => {
+const Input = () => {
 
-  const { item, setItem, items, setItems, addWish } = useContext(TaskContext);
+  const { item, setItem, addWish } = useContext(TaskContext);
 
   const newItem = () => {
     if (item.trim() !== '') {
       const newItem = {
         wishTitle: item,
       }
-      setItems((items) => [newItem, ...items]); // orden how the save new task
+      addWish(newItem);
       setItem('')
-      addWish(newItem)
-
     } else {
       alert('You forgot to make a wish...')
-      setItem('')
     }
   }
 
-  //activamos "enter" -> if press -> add element
   const keyPress = (e) => {
     const code = e.keyCode || e.which;
     if (code === 13) {
@@ -44,9 +38,6 @@ const Input = ({ children }) => {
           onChange={(e) => setItem(e.target.value)}
           onKeyPress={(e) => keyPress(e)} />
         <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2 font-mono' onClick={newItem}>Make a wish</button>
-       
-        <LoginBtn /> 
-        
       </div>
     </div>
   );

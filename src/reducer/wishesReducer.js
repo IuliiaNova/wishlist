@@ -3,7 +3,7 @@ export const wishesReducer = (state, action) => {
     case "GET_ALL":
       return [...action.payload];
     case "ADD_WISH":
-      return [...state.payload];
+      return [state.payload];
     case "DELETE_WISH":
       return action.payload;
     case "UPDATE_WISH":

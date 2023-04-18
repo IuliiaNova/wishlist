@@ -6,16 +6,15 @@ import TaskContext from "../context/TaskContext";
 
 
 
-const Task = ({ idItem, item, deleteNode, changeState, className }) => {
+const Task = ({ idItem, item, changeState, className, deleteWish }) => {
 
-  const { items, setItems } = useContext(TaskContext);
+  const { items, setItems, newItemValue, setNewItemValue } = useContext(TaskContext);
 
   const inputChange = (e) => {
     setNewItemValue(e.target.value);
   };
 
   const [editable, setEditable] = useState(false);
-  const [newItemValue, setNewItemValue] = useState(item);
   
   const updateClick = (id) => {
       const arr = items.map((item) => {
@@ -46,13 +45,13 @@ const Task = ({ idItem, item, deleteNode, changeState, className }) => {
       <div className="icons flex gap-2">
         {editable ? (
           <>
-            <button onClick={()=> updateClick(idItem)} className="text-violet-800 font-bold">Update</button>
+            <button onClick={updateClick} className="text-violet-800 font-bold">Update</button>
             <button onClick={cancelClick} className="text-violet-800 font-bold">Cancel</button>
           </>
         ) : (
           <>
             <FontAwesomeIcon icon={faPencilAlt} onClick={() => setEditable(true)} className="flex-col text-violet-800" />
-            <FontAwesomeIcon icon={faTrash} onClick={deleteNode} className="flex-col text-violet-800" />
+            <FontAwesomeIcon icon={faTrash} onClick={deleteWish} className="flex-col text-violet-800" />
           </>
         )}
       </div>

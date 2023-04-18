@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import Task from "./Tasks";
-import { v4 } from "uuid";
 import TaskContext from "../context/TaskContext";
 
 const SearchedList = () => {

@@ -1,27 +1,33 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import Task from "./Tasks";
-import { v4 } from "uuid";
 import TaskContext from "../context/TaskContext";
 
 const TaskListActive = () => {
 
-    const [item, setItem] = useState(''); // state in input 
-    const { items, setItems, deleteNode, changeState } = useContext(TaskContext);
+    const { changeState, wishes, getWishes, deleteWish } = useContext(TaskContext);
     const classN = "flex-col";
 
 
     useEffect(() => {
-        localStorage.setItem('items', JSON.stringify(items))
-    }, [items]) //dependencia -> si se cambia 'items' -> inicia useEffect
-
+        const fetchActiveWishes = async () => {
+          await getWishes();
+        };
+        fetchActiveWishes(); 
+      }, [getWishes]);
 
     return (
 
         <div className="task-list w-[55vw] bg-violet-700  p-8 rounded-lg flex flex-col items-center justify-center gap-2  m-4 ml-80">
-            {items.filter((item) => item.state === "active").map((item, ind) => (
-                <Task key={`task-${ind}`} idItem={`${item.id}`} item={`${item.item}`} className={classN} deleteNode={() => deleteNode(item.id)} changeState={() => changeState(item.id)} />
+            {wishes.filter((wish) => wish.state === "Active").map((wish, ind) => (
+                <Task 
+                key={`task-${ind}`} 
+                idItem={`${wish?._id}`} 
+                item={`${wish?.wishTitle}`} 
+                className={classN} 
+                deleteWish={() => deleteWish(`${wish?._id}`)} 
+                changeState={() => changeState(`${wish?._id}`)} />
             ))}
-            <p className="text-white font-mono">Total wishes: {items.filter((item) => item.state !== "closed").length} </p>
+            <p className="text-white font-mono">Total wishes: {wishes.filter((item) => item.state !== "Closed").length} </p>
         </div>
     )
 }

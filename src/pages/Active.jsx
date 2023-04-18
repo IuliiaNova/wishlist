@@ -1,13 +1,14 @@
 import React from "react";
 import Input from "../components/Input";
 import Buttons from "../components/Button";
-import Search from "../components/Search";
 import TaskListActive from "../components/TaskListActive";
+import Header from "../components/Header";
 
 const Active = () => {
 
     return (
-        <div className="">
+    <div className="">
+      <Header />
       <Input />
       <Buttons />
       <TaskListActive />

@@ -9,45 +9,13 @@ export const initialState = [];
 
 const TaskProvider = ( {children} ) => {
 
-  const [item, setItem] = useState('');
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || [] );
-  const [searchItem, setSearchItem] = useState('');
-  const [matchingItems, setMatchingItems] = useState([]);
+  const [item, setItem] = useState();
   const [wishes, dispatch] = useReducer(wishesReducer, initialState);
+  const [newItemValue, setNewItemValue] = useState(item);
   const { getIdTokenClaims } = useAuth0();
-
-
-  const deleteNode = (id) => {
-    setItems(items.filter((item) => item.id !== id))
-  }
-
-  const changeState = (id) => {
-    setItems(items.map((task) => {
-      return task.id === id ? { ...task, state: task.state === "active" ? "closed" : "active" } : task;
-    }));
-    const selectedItem = items.find((task) => task.id === id);
-    if (selectedItem.state === "active") {
-      setTimeout(function () {
-        alert("Congratulations, your Dreams come true!");
-      }, 500);
-    }
-  };
-  
-  const searchItems = (e) => {
-      e.preventDefault();
-      const filteredItems = items.filter((item) => {
-          const checkItem = item.item;
-          return checkItem.toLowerCase().includes(searchItem.toLowerCase());
-      });
-      setMatchingItems(filteredItems);
-      setSearchItem(''); //matchingItems
-  };
-
-  // DATABASE 
 
   const addWish = async (wish) => {
     const token = await getIdTokenClaims();
-    console.log(token)
     const res = await fetch("http://localhost:3001/addwish", {
       method: "POST",
       headers: {
@@ -57,7 +25,6 @@ const TaskProvider = ( {children} ) => {
       body: JSON.stringify(wish),
     });
     const data = await res.json();
-    console.log(data)
 
     if (data.ok){
       dispatch({ type: wishesTypes.add, payload: data.wish})
@@ -73,23 +40,57 @@ const TaskProvider = ( {children} ) => {
     }
   };
 
+  const deleteWish = async (id) =>{
+    const token = await getIdTokenClaims();
+    const res = await fetch(`http://localhost:3001/deletewish/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token.__raw}`,
+        "Content-Type": "application/json",
+      }
+    });
+    const data = await res.json();
+
+    if(data.ok){
+      const filteredTodos = wishes.filter((wish) => wish.todoId !== id);
+      dispatch({ type: wishesTypes.deleteWish, payload: filteredTodos })
+    }
+  };
+
+  const updateWish = async (newWish) => {
+    const res = await fetch(`http://localhost:4000/updatewish/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newWish),
+    });
+    const data = await res.json();
+
+    if (data.ok) {
+      const filteredWishes = wishes.filter(
+        (todo) => todo.todoId !== newWish.todoId
+      );
+      const allWishes = [...filteredWishes, newWish];
+      dispatch({ type: wishesTypes.updateWish, payload: allWishes });
+    }
+  };
+
+
+
+
 
   return(
     <TaskContext.Provider value={{ 
-    item, 
-    setItem, 
-    items, 
-    setItems, 
-    deleteNode, 
-    changeState, 
-    searchItem, 
-    setSearchItem, 
-    matchingItems, 
-    setMatchingItems, 
-    searchItems, 
     wishes,
     addWish, 
-    getWishes }}>
+    getWishes,
+    deleteWish,
+    item, 
+    setItem,
+    updateWish,
+    newItemValue, 
+    setNewItemValue }}>
 
         {children}
       </TaskContext.Provider>

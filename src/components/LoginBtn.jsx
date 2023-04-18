@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const LoginBtn = () => {
 
-  const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } = useAuth0();
+  const { isLoading, isAuthenticated, error, loginWithRedirect, logout } = useAuth0();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -15,16 +15,13 @@ const LoginBtn = () => {
   if (isAuthenticated) {
     return (
       <>
-        <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2 font-mono' onClick={() => logout({ returnTo: window.location.origin })}>
+        <button className='enter border-2 text-white p-2 m-2 w-30 rounded-lg mb-2 font-mono' onClick={() => logout({ returnTo: window.location.origin })}>
           Log out
         </button>
-        <div className='text-white p-2 m-2 w-40 font-mono'>
-          Hello {user.name}
-        </div>
       </>
     );
   } else {
-    return <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2 font-mono' onClick={() => loginWithRedirect()}>Login</button>;
+    return <button className='enter border-2 text-white p-2 m-2 w-30 rounded-lg mb-2 font-mono' onClick={() => loginWithRedirect()}>Login</button>;
   }
 }
 
