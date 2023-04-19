@@ -16,7 +16,7 @@ const TaskProvider = ( {children} ) => {
 
   const addWish = async (wish) => {
     const token = await getIdTokenClaims();
-    const res = await fetch("http://localhost:3001/addwish", {
+    const res = await fetch("http://localhost:3001/wish/addwish", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token.__raw}`,
@@ -32,7 +32,7 @@ const TaskProvider = ( {children} ) => {
   }
 
   const getWishes = async () =>{
-    const res = await fetch("http://localhost:3001/getwishes");
+    const res = await fetch("http://localhost:3001/wish/getwishes");
     const data = await res.json();
 
     if(data.ok){
@@ -42,7 +42,7 @@ const TaskProvider = ( {children} ) => {
 
   const deleteWish = async (id) =>{
     const token = await getIdTokenClaims();
-    const res = await fetch(`http://localhost:3001/deletewish/${id}`, {
+    const res = await fetch(`http://localhost:3001/wish/deletewish/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token.__raw}`,
@@ -52,29 +52,33 @@ const TaskProvider = ( {children} ) => {
     const data = await res.json();
 
     if(data.ok){
-      const filteredTodos = wishes.filter((wish) => wish.todoId !== id);
-      dispatch({ type: wishesTypes.deleteWish, payload: filteredTodos })
+      const filteredWishes = wishes.filter((wish) => wish.todoId !== id);
+      dispatch({ type: wishesTypes.deleteWish, payload: filteredWishes })
     }
   };
 
-  const updateWish = async (newWish) => {
-    const res = await fetch(`http://localhost:4000/updatewish/`, {
+  const updateWish = async (id, newWish) => {
+    const token = await getIdTokenClaims();
+    const res = await fetch(`http://localhost:4000/updatewish/${id}`, {
       method: "PUT",
       headers: {
+        Authorization: `Bearer ${token.__raw}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newWish),
     });
+
     const data = await res.json();
 
     if (data.ok) {
       const filteredWishes = wishes.filter(
-        (todo) => todo.todoId !== newWish.todoId
+        (wish) => wish._id !== newWish._id
       );
       const allWishes = [...filteredWishes, newWish];
       dispatch({ type: wishesTypes.updateWish, payload: allWishes });
     }
   };
+
 
 
 
