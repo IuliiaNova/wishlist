@@ -12,10 +12,12 @@ const TaskProvider = ( {children} ) => {
   const [item, setItem] = useState();
   const [wishes, dispatch] = useReducer(wishesReducer, initialState);
   const [newItemValue, setNewItemValue] = useState(item);
+  const [editable, setEditable] = useState(false);
   const { getIdTokenClaims } = useAuth0();
 
   const addWish = async (wish) => {
     const token = await getIdTokenClaims();
+  
     const res = await fetch("http://localhost:3001/wish/addwish", {
       method: "POST",
       headers: {
@@ -29,10 +31,18 @@ const TaskProvider = ( {children} ) => {
     if (data.ok){
       dispatch({ type: wishesTypes.add, payload: data.wish})
     }
+
+    getWishes();
   }
 
   const getWishes = async () =>{
-    const res = await fetch("http://localhost:3001/wish/getwishes");
+    const token = await getIdTokenClaims();
+    const res = await fetch("http://localhost:3001/wish/getwishes", {
+      headers: {
+        Authorization: `Bearer ${token.__raw}`,
+        "Content-Type": "application/json",
+      },
+    });
     const data = await res.json();
 
     if(data.ok){
@@ -49,6 +59,7 @@ const TaskProvider = ( {children} ) => {
         "Content-Type": "application/json",
       }
     });
+
     const data = await res.json();
 
     if(data.ok){
@@ -59,7 +70,7 @@ const TaskProvider = ( {children} ) => {
 
   const updateWish = async (id, newWish) => {
     const token = await getIdTokenClaims();
-    const res = await fetch(`http://localhost:4000/updatewish/${id}`, {
+    const res = await fetch(`http://localhost:3001/updatewish/${id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token.__raw}`,
@@ -71,15 +82,13 @@ const TaskProvider = ( {children} ) => {
     const data = await res.json();
 
     if (data.ok) {
-      const filteredWishes = wishes.filter(
-        (wish) => wish._id !== newWish._id
+      const filteredWishes = wishes.map(
+        (wish) => wish._id === newWish._id
       );
       const allWishes = [...filteredWishes, newWish];
       dispatch({ type: wishesTypes.updateWish, payload: allWishes });
     }
   };
-
-
 
 
 
@@ -94,7 +103,10 @@ const TaskProvider = ( {children} ) => {
     setItem,
     updateWish,
     newItemValue, 
-    setNewItemValue }}>
+    setNewItemValue,
+    editable, 
+    setEditable,
+     }}>
 
         {children}
       </TaskContext.Provider>

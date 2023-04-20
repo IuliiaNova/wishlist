@@ -7,7 +7,6 @@ const TaskListActive = () => {
     const { changeState, wishes, getWishes, deleteWish } = useContext(TaskContext);
     const classN = "flex-col";
 
-
     useEffect(() => {
         const fetchActiveWishes = async () => {
           await getWishes();
@@ -31,6 +30,5 @@ const TaskListActive = () => {
         </div>
     )
 }
-
 
 export default TaskListActive;

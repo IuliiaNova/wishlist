@@ -1,27 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Task from "./Tasks";
 import TaskContext from "../context/TaskContext";
 
+
 const TaskList = () => {
 
- // state in input 
-  const { searchItems, getWishes, wishes, deleteWish } = useContext(TaskContext);
+  const { searchItems, wishes, deleteWish, updateWish, newItemValue } = useContext(TaskContext);
 
-  useEffect(() => {
-    const fetchActiveWishes = async () => {
-      await getWishes();
-    };
-    fetchActiveWishes(); 
-  }, [getWishes]);
 
   return (
-    <div className="task-list bg-violet-700 p-8 rounded-lg flex flex-col items-center justify-center gap-2 m-4 ml-8">
+    <div className="task-list w-[55vw] bg-violet-700  p-8 rounded-lg flex flex-col items-center justify-center gap-2  m-4 ml-80">
       {wishes.length === 0 ? (
         <p className="text-white text-xl font-bold mb-4">It's time to make a wish!</p>
       ) : (
-        wishes.map((wish, ind) => (
+        wishes.map((wish) => (
           <Task
-            key={`task-${ind}`}
+            key={`wish-${wish?._id}`}
             idItem={`${wish?._id}`}
             item={`${wish?.wishTitle}`}
             className={
@@ -31,8 +25,8 @@ const TaskList = () => {
             } 
             searchItems={() => searchItems()}
             deleteWish={() => deleteWish(`${wish?._id}`)}
+            updateWish={()=> updateWish(`${wish?._id}`, newItemValue)}
           />
-          
         ))
       )}
       <p className="text-white">Total wishes: {wishes.length} </p>
