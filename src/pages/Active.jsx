@@ -11,7 +11,6 @@ const Active = () => {
       <Header />
       <Input />
       <Buttons />
-      <Search />
       <TaskListActive />
     </div>
   )
