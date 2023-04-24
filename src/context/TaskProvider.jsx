@@ -32,7 +32,6 @@ const TaskProvider = ( {children} ) => {
       dispatch({ type: wishesTypes.add, payload: data.wish})
     }
 
-    getWishes();
   }
 
   const getWishes = async () =>{
