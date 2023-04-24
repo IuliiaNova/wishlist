@@ -1,11 +1,7 @@
-import React, { useContext } from "react";
 import Task from "./Tasks";
-import TaskContext from "../context/TaskContext";
 
 
-const TaskList = () => {
-
-  const { searchItems, wishes, deleteWish, updateWish, newItemValue } = useContext(TaskContext);
+const TaskList = (wishes) => {
 
 
   return (
@@ -16,16 +12,13 @@ const TaskList = () => {
         wishes.map((wish) => (
           <Task
             key={`wish-${wish?._id}`}
-            idItem={`${wish?._id}`}
-            item={`${wish?.wishTitle}`}
+            wishId={`${wish?._id}`}
+            wish={`${wish?.wishTitle}`}
             className={
               wish?.state === "Closed"
                 ? "flex flex-col line-through bg-lime-500 w-[45vw] border text-lg rounded-lg items-center justify-center p-1"
                 : "flex flex-col"
             } 
-            searchItems={() => searchItems()}
-            deleteWish={() => deleteWish(`${wish?._id}`)}
-            updateWish={()=> updateWish(`${wish?._id}`, newItemValue)}
           /> 
         ))
       )}

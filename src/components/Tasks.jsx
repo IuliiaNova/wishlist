@@ -5,13 +5,18 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import TaskContext from "../context/TaskContext";
 
 
-const Task = ({ wishTitle, className }) => {
+const Task = ({ wish, className }) => {
 
   
   const { user, updateWish, deleteWish } = useContext(TaskContext);
   
   const [editable, setEditable] = useState(false);
-  const [newWishTitle, setNewWishTitle] = useState(wishTitle.wishTitle);
+  const [newWishTitle, setNewWishTitle] = useState(wish.wishTitle);
+
+  const handleEditWish = () => {
+    updateWish(newWishTitle, wish._id, user._id);
+    setEditable(false)
+  }
 
   const inputChange = (e) => {
     setNewWishTitle(e.target.value);
@@ -28,12 +33,12 @@ const Task = ({ wishTitle, className }) => {
       {editable ? (
         <input type="text" value={newWishTitle} onChange={inputChange} className="flex-1 pl-2" />
       ) : (
-        <p className={className}>{wishTitle}</p>
+        <p className={className}>{wish}</p>
       )}
       <div className="icons flex gap-2">
         {editable ? (
           <>
-            <button onClick={updateWish} className="text-violet-800 font-bold">Update</button>
+            <button onClick={handleEditWish} className="text-violet-800 font-bold">Update</button>
             <button onClick={cancelClick} className="text-violet-800 font-bold">Cancel</button>
           </>
         ) : (
