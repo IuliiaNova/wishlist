@@ -1,93 +1,82 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import TaskContext from "./TaskContext";
 import { wishesReducer } from "../reducer/wishesReducer";
 import { wishesTypes } from "../reducer/types";
-import { useAuth0 } from "@auth0/auth0-react";
+import { add, remove, updateWish, updateWishState } from "../APIs/wishesApi";
+import { create, login, createGoogle, googleLogin } from "../APIs/userApi";
 
-export const initialState = []; 
+export const initialState = {
+  user: null,
+}; 
 
 
 const TaskProvider = ( {children} ) => {
 
-  const [item, setItem] = useState();
-  const [wishes, dispatch] = useReducer(wishesReducer, initialState);
-  const [newItemValue, setNewItemValue] = useState(item);
-  const [editable, setEditable] = useState(false);
-  const { getIdTokenClaims } = useAuth0();
+  const [state, dispatch] = useReducer(wishesReducer, initialState);
 
-  const addWish = async (wish) => {
-    const token = await getIdTokenClaims();
-  
-    const res = await fetch("http://localhost:3001/wish/addwish", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token.__raw}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(wish),
-    });
-    const data = await res.json();
-
-    if (data.ok){
-      dispatch({ type: wishesTypes.add, payload: data.wish})
+  const createUser = async (user) => {
+    const response = await create(user);
+    if (response.ok) {
+      localStorage.setItem("token", response.user.token);
+      dispatch({ type: wishesTypes.register, payload: response.user });
     }
+  };
 
-    getWishes();
+  const createUserGoogle = async (user) => {
+    const response = await createGoogle(user);
+    if (response.ok) {
+      localStorage.setItem("token", response.user.token);
+      dispatch({ type: wishesTypes.register, payload: response.user });
+    }
+  };
+
+  const loginUser = async (user) => {
+    const response = await login(user);
+    if (response.ok) {
+      localStorage.setItem("token", response.user.token);
+      dispatch({ type: wishesTypes.login, payload: response.user });
+    }
+  };
+
+  const loginUserGoogle = async (user) => {
+    const response = await googleLogin(user);
+    if (response.ok) {
+      localStorage.setItem("token", response.user.token);
+      dispatch({ type: wishesTypes.login, payload: response.user });
+    }
+  };
+
+
+
+  const addWish = async (wish, userID) => {
+    const response = await add(wish, userID);
+
+    if (response.ok){
+      dispatch({ type: wishesTypes.addWish, payload: response.user})
+    }
   }
 
-  const getWishes = async () =>{
-    const token = await getIdTokenClaims();
-    const res = await fetch("http://localhost:3001/wish/getwishes", {
-      headers: {
-        Authorization: `Bearer ${token.__raw}`,
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
+  const deleteWish = async (wish, userID) =>{
+    const response = await remove(wish, userID);
 
-    if(data.ok){
-      dispatch({ type: wishesTypes.getWish, payload: data.wishes })
+    if(response.ok){
+      dispatch({ type: wishesTypes.deleteWish, payload: response.user })
     }
   };
 
-  const deleteWish = async (id) =>{
-    const token = await getIdTokenClaims();
-    const res = await fetch(`http://localhost:3001/wish/deletewish/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token.__raw}`,
-        "Content-Type": "application/json",
-      }
-    });
-
-    
-    const data = await res.json();
-
-    if(data.ok){
-      const filteredWishes = wishes.filter((wish) => wish.todoId !== id);
-      dispatch({ type: wishesTypes.deleteWish, payload: filteredWishes })
+  const updateWish = async (wish, wishId, userID) => {
+    const response = await updateWish(wish, wishId, userID);
+ 
+    if (response.ok) {
+      dispatch({ type: wishesTypes.updateWish, payload: response.user });
     }
   };
 
-  const updateWish = async (id, newWish) => {
-    const token = await getIdTokenClaims();
-    const res = await fetch(`http://localhost:3001/updatewish/${id}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token.__raw}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newWish),
-    });
-
-    const data = await res.json();
-
-    if (data.ok) {
-      const filteredWishes = wishes.map(
-        (wish) => wish._id === newWish._id
-      );
-      const allWishes = [...filteredWishes, newWish];
-      dispatch({ type: wishesTypes.updateWish, payload: allWishes });
+  const updateWishState = async (wish, state, userID) => {
+    const response = await updateWishState(wish, state, userID);
+ 
+    if (response.ok) {
+      dispatch({ type: wishesTypes.updateWish, payload: response.user });
     }
   };
 
@@ -96,17 +85,15 @@ const TaskProvider = ( {children} ) => {
 
   return(
     <TaskContext.Provider value={{ 
-    wishes,
-    addWish, 
-    getWishes,
-    deleteWish,
-    item, 
-    setItem,
-    updateWish,
-    newItemValue, 
-    setNewItemValue,
-    editable, 
-    setEditable,
+      ...state,
+      createUser,
+      createUserGoogle,
+      loginUser,
+      loginUserGoogle,
+      addWish, 
+      deleteWish,
+      updateWish,
+      updateWishState
      }}>
 
         {children}

@@ -1,14 +1,22 @@
+import { wishesTypes } from "./types";
+
 export const wishesReducer = (state, action) => {
   switch (action.type) {
-    case "GET_ALL":
-      return [...action.payload];
-    case "ADD_WISH":
-      return [state.payload];
-    case "DELETE_WISH":
-      return action.payload;
-    case "UPDATE_WISH":
-      return action.payload;
+    case wishesTypes.register:
+      return {...state, user: action.payload};
+    case wishesTypes.login:
+      return {...state, user: action.payload};
+    case wishesTypes.addWish:
+      return {...state, user: action.payload};
+    case wishesTypes.updateWish:
+      return {...state, user: action.payload};
+    case wishesTypes.deleteWish:
+      return {...state, user: action.payload};
     default:
       return state;
+    
   }
 }
+
+
+

@@ -26,7 +26,7 @@ const TaskList = () => {
             searchItems={() => searchItems()}
             deleteWish={() => deleteWish(`${wish?._id}`)}
             updateWish={()=> updateWish(`${wish?._id}`, newItemValue)}
-          />
+          /> 
         ))
       )}
       <p className="text-white">Total wishes: {wishes.length} </p>
