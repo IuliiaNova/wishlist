@@ -37,7 +37,7 @@ const Input = () => {
           placeholder='Enter your wish'
           onChange={(e) => setItem(e.target.value)}
           onKeyPress={(e) => keyPress(e)} />
-        <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2 font-mono' onClick={newItem}>Make a wish</button>
+        <button className='enter border-2 text-white p-2 m-2 w-40 rounded-lg mb-2 font-mono' onClick={addWish}>Make a wish</button>
       </div>
     </div>
   );

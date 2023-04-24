@@ -6,7 +6,13 @@ import { add, remove, updateWish, updateWishState } from "../APIs/wishesApi";
 import { create, login, createGoogle, googleLogin } from "../APIs/userApi";
 
 export const initialState = {
-  user: null,
+  user: {
+    name: "Iuliia Shikhanova",
+    email: "yshihanova@gmail.com",
+    password: "123456",
+    userID: "1",
+    wishes: []
+  },
 }; 
 
 
@@ -79,8 +85,6 @@ const TaskProvider = ( {children} ) => {
       dispatch({ type: wishesTypes.updateWish, payload: response.user });
     }
   };
-
-
 
 
   return(

@@ -1,7 +1,7 @@
 import Task from "./Tasks";
 
 
-const TaskList = (wishes) => {
+const TaskList = ({wishes}) => {
 
 
   return (
