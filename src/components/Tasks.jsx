@@ -21,16 +21,7 @@ const Task = ({ id, item, changeState, className, deleteWish, updateWish }) => {
     setNewItemValue(e.target.value);
   };
   
-  /*const updateClick = (id) => {
-      const arr = items.map((item) => {
-        if (item.id === id) {
-           item.item = newItemValue
-        }
-        return item;
-      })
-      setItems(arr);
-      setEditable(false);
-  };*/
+
 
   const cancelClick = () => {
     setNewItemValue(item);
