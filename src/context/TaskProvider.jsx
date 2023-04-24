@@ -60,6 +60,7 @@ const TaskProvider = ( {children} ) => {
       }
     });
 
+    
     const data = await res.json();
 
     if(data.ok){
